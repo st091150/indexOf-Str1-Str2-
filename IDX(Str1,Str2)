@@ -1,0 +1,47 @@
+package com.company;
+
+public class Main {
+    public static int findIdx(String firstStr, String secondStr) {
+        boolean ch = firstStr.equals(secondStr);
+        boolean ch1 = firstStr.length() > secondStr.length();
+
+        if ((firstStr.isEmpty() || secondStr.isEmpty() || !ch1) && !ch ) {
+            return -1;
+        } else if (ch) {
+            return 0;
+        }
+
+        for (int i = 0, j = 0; i < firstStr.length(); ) {
+
+            if (firstStr.charAt(i++) != secondStr.charAt(j)) {
+                continue;
+            }
+
+            if (secondStr.length() > 1) {
+                int sup = 0;
+
+                while (firstStr.charAt(i) == secondStr.charAt(++j)) {
+                    i++;
+                    if (j == secondStr.length() - 1) {
+                        return i - secondStr.length();
+                    }
+                    sup++;
+                }
+
+                j = 0;
+                i -=sup;
+                continue;
+
+            }
+            return --i;
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        String a = "oiuytrqweqwetyruqwe";
+        String b = "qwe";
+        int k = findIdx(a, b);
+        System.out.println(k);
+    }
+}
